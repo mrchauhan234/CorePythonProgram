@@ -1,1 +1,145 @@
-medicine details 
+MEDICINE DETAILS 
+import pickle
+import os
+# FUNCTION TO ADD A MEDICIN 
+def Addmedicin():
+    file=open("Medicin.dat","ab")
+    mid=input("\n\tEnter a medicin ID :")
+    mname=input("\n\tEnter a medicin name :")
+    price=input("\n\tEnter a price :")
+    Quty=input("\n\tEnter a  Number (Quty):")
+    pickle.dump(mid,file)
+    pickle.dump(mname,file)
+    pickle.dump(price,file)
+    pickle.dump(Quty,file)
+    print("\n\tMedicin Added successfully!")
+    input("\n\t--Press Enter To Continue...")
+    file.close()
+
+    
+#FUNCTION TO PRINT ALL THE MEDICIN
+def viewAllmedicin():
+    file=open("Medicin.dat","rb")
+    count=0
+    print("\nMID M_name Price Quty")
+    try:
+        while True:
+            print(pickle.load(file),end=" ")
+            print(pickle.load(file),end=" ")
+            print(pickle.load(file),end=" ")
+            print(pickle.load(file),end=" ")
+    except:
+        print("\n\tAll the medicin are here!")
+        input("\n\t--Press Enter To Continue...")
+    file.close()
+
+    
+#FUNCTION TO VIEW A MEDICIN BY ID
+def  viewmedicin():
+    file=open("Medicin.dat","rb")
+    MID=input("\n\tEnter a Medicin ID")
+    medFound=0
+    try:
+        while True:
+            data=pickle.load(file)
+            if(data==MID):
+                print("\n\tMedicin ID:",data)
+                print("\tMedicin Name:",pickle.load(file))
+                print("\tMedicin Price:",pickle.load(file))
+                print("\tMedicin Quty:",pickle.load(file))
+                medFound=1
+    except:
+        if(medFound==0):
+            print("\n\tMedicin Not Found!")
+        else:
+            print("\n\tHereis your Medicin!")
+        input("\n\t--Press Enter To Continue...")
+        file.close()
+
+#FUNCTION TO DELETE A MEDICIN
+def delete():
+    file1=opne("MedicinS.dat","rd")
+    temp=open("temp.dat","ab")
+    MId=input("\n\tEnter Medicin ID TO Delete:")
+    medfound=0
+    try:
+        while True:
+            data=pickle.load(file1)
+            if(data==med):
+                pickle.load(file1)
+                pickle.load(file1)
+                pickle.load(file1)
+                medFound=1
+            else:
+                pickle.dump(data,temp)
+    except:
+        if(medFound==0):
+            print("\n\tMedicin Not Found!")
+        else:print("\n\t Medicin Deleted successfully!")
+        input("\n\t--Press Enter To Continue...")
+    temp.close()
+    file1.close()
+    os.remove("MEDICIN.dat")
+    os.rename("temp.dat","MEDICIN.dat")
+#FUNCTION UPDATED A MEDICIN
+def updateMedicin():
+    file=open("MEDICIN.dat","rb")
+    temp=open("tem.dat","ab")
+    medFound=0
+    MID=input("\n\tEnter a Medicin Id ")
+    try:
+        while True:
+            data=pickle.load(file)
+            if(data==MID):
+                pickle.dump(data,temp)
+                name=pickle.load(file)
+                print("\n\tID :",data)
+                print("\tMedicin Name:",name)
+                pickle.dump(name,temp)
+                price=input("\tEnter a price :")
+                Quty=input("\tEnter Quantity :")
+                pickle.dump(price,temp)
+                pickle.dump(Quty,temp)
+                pickle.load(file)
+                picle.load(file)
+                medFound=1
+            else:
+                pickle.dump(data,temp)
+    except:
+        if(medFound==0):
+            print("\n\tMedicin Not Found!")
+        else:
+            print("\n\tMedicin Update successfully!")
+        input("\n\t--Press Enter To Continue...")
+        file.close()
+        temp.close()
+        os.remove("Medicin.dat")
+        os.rename("temp.dat","Medicin.dat")
+
+
+#DASHBOARD
+while True:
+    print("\n\t*** MADICAL STORE SOFTWARE***")
+    print("\n\t1. Add medicin")
+    print("\t2. view All medicin")
+    print("\t3. view  medicin ID")
+    print("\t4. delete A medicin")
+    print("\t5. update A medicin")
+    print("\t6. Exit")
+    ch=input("\n\tEnter your choice:")
+    if(ch==):
+        print("\n\t----BYE-BYE ADMIN!")
+        break
+    elif(ch==1):
+        Addmedicin()
+    elif(ch==2):
+        viewAllmedicin()
+    elif(ch==3):
+        viewmedicin()
+    elif(ch==4):
+        delete()
+    elif(ch==5):
+        updateMedicin()
+    else:
+        print("\n\tWrong Entered!")
+        input("\n\tpress Enter To Try Again !...")
