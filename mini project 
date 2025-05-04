@@ -1,4 +1,4 @@
-MEDICINE DETAILS 
+ MEDICINE DETAILS 
 import pickle
 import os
 # FUNCTION TO ADD A MEDICIN 
